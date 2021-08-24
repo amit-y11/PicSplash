@@ -15,14 +15,14 @@ Features available:
 # Screenshots
 <table style={border:"none"}>
 <tr>
-    <td><img src="mock-ups/image_1.png"/></td>
-    <td><img src="mock-ups/image_3.png"/></td>
-    <td><img src="mock-ups/image_4.png"/></td>
+    <td><img src="mock-ups/image_1.png" width=300/></td>
+    <td><img src="mock-ups/image_3.png" width=300/></td>
+    <td><img src="mock-ups/image_4.png" width=300/></td>
 </tr>
 <tr>
-    <td><img src="mock-ups/image_5.png"/></td>
-    <td><img src="mock-ups/image_6.png"/></td>
-    <td><img src="mock-ups/image_10.png"/></td>
+    <td><img src="mock-ups/image_5.png" width=300/></td>
+    <td><img src="mock-ups/image_6.png" width=300/></td>
+    <td><img src="mock-ups/image_10.png" width=300/></td>
 </tr>
 </p>
 
