@@ -8,7 +8,7 @@
    
    <application
         android:label="PicSplash"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:requestLegacyExternalStorage="true">
 
         <provider
