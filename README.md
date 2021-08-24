@@ -13,7 +13,7 @@ Features available:
 
 
 # Screenshots
-<table style={border:"none"}>
+<table>
 <tr>
     <td><img src="mock-ups/image_1.png" width=300/></td>
     <td><img src="mock-ups/image_3.png" width=300/></td>
