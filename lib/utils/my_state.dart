@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:picsplash/utils/pref_manager.dart';
 
 class ThemeState extends ChangeNotifier {
   int currentThemeIndex = 0;
@@ -8,12 +9,19 @@ class ThemeState extends ChangeNotifier {
     ThemeMode.dark,
     ThemeMode.system
   ];
-  
+  void getTheme() async {
+    currentThemeIndex = await PrefManager().getThemeIndex();
+    currentThemeMode = _themeModes[currentThemeIndex];
+    currentAccentIndex = await PrefManager().getAccentIndex();
+    currentAccent = accentColors[currentAccentIndex];
+    notifyListeners();
+  }
 
   changeThemeMode(index) {
     currentThemeMode = _themeModes[index];
     currentThemeIndex = index;
     notifyListeners();
+    PrefManager().saveThemeIndex(index);
   }
 
   ThemeData getDarkTheme() {
@@ -54,6 +62,7 @@ class ThemeState extends ChangeNotifier {
     currentAccent = accentColors[index];
     currentAccentIndex = index;
     notifyListeners();
+    PrefManager().saveAccentIndex(index);
   }
 }
 

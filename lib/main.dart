@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context, _) {
           final themeState = Provider.of<ThemeState>(context);
           final pageState = Provider.of<PageState>(context);
-
+          themeState.getTheme();
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             // this will prevent app from closing on
