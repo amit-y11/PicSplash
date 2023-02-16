@@ -36,7 +36,7 @@ class _ExplorePageState extends State<ExplorePage>
     return Scaffold(
       body: Stack(children: [
         Container(
-          margin: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),
+          margin: const EdgeInsets.fromLTRB(10.0, 80.0, 10.0, 10.0),
           constraints: BoxConstraints.expand(height: 100),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(15)),
