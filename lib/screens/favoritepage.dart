@@ -11,7 +11,6 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-
   @override
   void initState() {
     getImageModels();
@@ -27,7 +26,7 @@ class _FavoritePageState extends State<FavoritePage> {
     if (favorites.length != 0) {
       favorites.forEach((url) {
         final imagedata = {
-          "id":"",
+          "id": "",
           "urls": {
             "small": "",
             "raw": "",
@@ -52,10 +51,13 @@ class _FavoritePageState extends State<FavoritePage> {
                 child: Column(
                   children: [
                     Container(
-                      margin: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),
-                      constraints: BoxConstraints.expand(height: 100),
+                      margin: const EdgeInsets.fromLTRB(10.0, 60.0, 10.0, 10.0),
+                      constraints: BoxConstraints.expand(height: 80),
                       decoration: BoxDecoration(
-                          color: Colors.red[400],
+                          color: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.8),
                           borderRadius: BorderRadius.circular(20)),
                       child: Center(
                           child: Text(

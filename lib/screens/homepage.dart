@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage>
     super.initState();
     getMyImages();
     scrolls.addListener(() {
-      if (scrolls.position.pixels == scrolls.position.maxScrollExtent) {
+      if (scrolls.position.pixels > scrolls.position.maxScrollExtent / 2) {
         getMyImages();
       }
     });
