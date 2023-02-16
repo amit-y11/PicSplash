@@ -38,6 +38,7 @@ class PhotosView extends StatelessWidget {
         horizontal: 10.0,
       ),
       child: SingleChildScrollView(
+        controller: scrollController,
         child: StaggeredGrid.count(
           crossAxisSpacing: 8,
           mainAxisSpacing: 12,
