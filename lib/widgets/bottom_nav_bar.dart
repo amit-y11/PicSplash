@@ -13,34 +13,60 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pageState = Provider.of<PageState>(context);
-    return BottomNavigationBar(
-        elevation: 0.0,
-        selectedItemColor: Theme.of(context).accentColor,
-        type: BottomNavigationBarType.fixed,
-        showUnselectedLabels: false,
-        enableFeedback: true,
-        onTap: (index) {
-          pageState.changePage(index);
-          pageController.jumpToPage(index);
+    return NavigationBar(
+        onDestinationSelected: (value) {
+          pageState.changePage(value);
+          pageController.jumpToPage(value);
         },
-        currentIndex: pageState.currentPage,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              label: "Home",
-              activeIcon: Icon(Icons.home)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.explore_outlined),
-              label: "Explore",
-              activeIcon: Icon(Icons.explore)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border),
-              label: "Favorite",
-              activeIcon: Icon(Icons.favorite)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings_outlined),
-              label: "Settings",
-              activeIcon: Icon(Icons.settings)),
+        selectedIndex: pageState.currentPage,
+        destinations: [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            label: "Home",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.explore_outlined),
+            label: "Explore",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.favorite_border),
+            label: "Favorite",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings_outlined),
+            label: "Settings",
+          ),
         ]);
   }
 }
+
+
+// BottomNavigationBar(
+//         elevation: 0.0,
+//         selectedItemColor: Theme.of(context).accentColor,
+//         type: BottomNavigationBarType.fixed,
+//         showUnselectedLabels: false,
+//         enableFeedback: true,
+//         onTap: (index) {
+//           pageState.changePage(index);
+//           pageController.jumpToPage(index);
+//         },
+//         currentIndex: pageState.currentPage,
+//         items: [
+//           BottomNavigationBarItem(
+//               icon: Icon(Icons.home_outlined),
+//               label: "Home",
+//               activeIcon: Icon(Icons.home)),
+//           BottomNavigationBarItem(
+//               icon: Icon(Icons.explore_outlined),
+//               label: "Explore",
+//               activeIcon: Icon(Icons.explore)),
+//           BottomNavigationBarItem(
+//               icon: Icon(Icons.favorite_border),
+//               label: "Favorite",
+//               activeIcon: Icon(Icons.favorite)),
+//           BottomNavigationBarItem(
+//               icon: Icon(Icons.settings_outlined),
+//               label: "Settings",
+//               activeIcon: Icon(Icons.settings)),
+//         ])

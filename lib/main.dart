@@ -74,17 +74,9 @@ class _MyAppState extends State<MyApp> {
             ),
 
             themeMode: themeState.currentThemeMode,
-            theme: ThemeData(
-              accentColor: themeState.currentAccent,
-              scaffoldBackgroundColor: Colors.white,
-              colorScheme: ColorScheme.light(),
-              canvasColor: Colors.white,
-              primaryColor: Colors.white,
-            ),
+            theme: themeState.getLightTheme(),
             darkTheme: themeState.getDarkTheme(),
           );
         });
   }
 }
-
-

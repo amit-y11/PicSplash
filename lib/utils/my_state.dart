@@ -26,15 +26,16 @@ class ThemeState extends ChangeNotifier {
 
   ThemeData getDarkTheme() {
     return ThemeData(
-      // scaffoldBackgroundColor: Colors.black45,
-      colorScheme: ColorScheme.dark(),
-      // canvasColor: Colors.black87,
-      appBarTheme: AppBarTheme(
-        // brightness: Brightness.dark,
-        color: Colors.black45,
-      ),
-      accentColor: currentAccent,
-      primaryColor: Colors.black45,
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      colorSchemeSeed: currentAccent,
+    );
+  }
+
+  ThemeData getLightTheme() {
+    return ThemeData(
+      useMaterial3: true,
+      colorSchemeSeed: currentAccent,
     );
   }
 

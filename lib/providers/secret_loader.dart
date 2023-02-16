@@ -14,7 +14,7 @@ class Secret {
 
 class SecretLoader {
   Future<String> load() async {
-    final keyJson = await rootBundle.loadString("secrets.json");
+    final keyJson = await rootBundle.loadString("assets/secrets.json");
     final keys = jsonDecode(keyJson);
     Secret secret = Secret.fromJson(keys);
     return secret.apiKey;
