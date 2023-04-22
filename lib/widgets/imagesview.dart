@@ -1,6 +1,6 @@
 import 'dart:io';
+import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -84,10 +84,10 @@ class _ImagesViewState extends State<ImagesView> {
                   color: Colors.black,
                 ),
                 onTap: () {
-                  setWallpaper(1);
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Setting Wallpaper')));
+                  setWallpaper(1);
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //     SnackBar(content: Text('Setting Wallpaper')));
                 },
               ),
               ListTile(
@@ -100,10 +100,10 @@ class _ImagesViewState extends State<ImagesView> {
                   color: Colors.black,
                 ),
                 onTap: () {
-                  setWallpaper(2);
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Setting Wallpaper')));
+                  setWallpaper(2);
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //     SnackBar(content: Text('Setting Wallpaper')));
                 },
               ),
               ListTile(
@@ -116,10 +116,10 @@ class _ImagesViewState extends State<ImagesView> {
                   color: Colors.black,
                 ),
                 onTap: () {
-                  setWallpaper(3);
                   Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Setting Wallpaper')));
+                  setWallpaper(3);
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //     SnackBar(content: Text('Setting Wallpaper')));
                 },
               ),
             ],
@@ -129,18 +129,75 @@ class _ImagesViewState extends State<ImagesView> {
     );
   }
 
-  static const platform =
-      const MethodChannel('com.example.picsplash/wallpaper');
+  // static const platform =
+  //     const MethodChannel('com.example.picsplash/wallpaper');
+
   Future<void> setWallpaper(int type) async {
-    var file =
-        await DefaultCacheManager().getSingleFile(widget.images.urls.full);
+    String url = widget.images.urls.full;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        // title: Text('Downloading High Quality Image for you...'),
+        content: Container(
+          height: 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(
+                height: 16,
+              ),
+              Text('downloading high quality image...'),
+            ],
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
+    // var file =
+    //     await DefaultCacheManager().getSingleFile(widget.images.urls.full);
+    if (mounted) Navigator.pop(context);
+    late String result;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        // title: Text('Setting Wallpaper...'),
+        content: Container(
+          height: 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(
+                height: 16,
+              ),
+              Text('setting wallpaper...'),
+            ],
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
+
     try {
-      await platform.invokeMethod('setWallpaper', [file.path, type]);
+      await AsyncWallpaper.setWallpaper(
+        url: widget.images.urls.full,
+        wallpaperLocation: type,
+        toastDetails: ToastDetails.success(),
+        errorToastDetails: ToastDetails.error(),
+      );
     } on PlatformException catch (e) {
+      result = e.message ?? 'Unknown Error';
       print(e);
     }
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Wallpaper set successfully')));
+    // var file =
+    //     await DefaultCacheManager().getSingleFile(widget.images.urls.full);
+    // try {
+    //   await platform.invokeMethod('setWallpaper', [file.path, type]);
+    // } on PlatformException catch (e) {
+    //   print(e);
+    // }
   }
 
   double angle = 0.0;
@@ -149,32 +206,31 @@ class _ImagesViewState extends State<ImagesView> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Hero(
-        tag: widget.images.id,
-        transitionOnUserGestures: true,
-        child: Stack(children: [
-          Container(
-            constraints: BoxConstraints.expand(),
-            child: InteractiveViewer(
-              onInteractionUpdate: (ScaleUpdateDetails details) {
-                setState(() {
-                  angle = details.rotation;
-                });
-              },
-              onInteractionEnd: (ScaleEndDetails details) {
-                setState(() {
-                  angle = 0.0;
-                });
-              },
-            child: Transform.rotate(
-              angle: angle,
-              child: FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image: widget.images.urls.regular,
-                fit: BoxFit.contain,
-              ),
-            ),
-            )
-          ),
+          tag: widget.images.id,
+          transitionOnUserGestures: true,
+          child: Stack(children: [
+            Container(
+                constraints: BoxConstraints.expand(),
+                child: InteractiveViewer(
+                  onInteractionUpdate: (ScaleUpdateDetails details) {
+                    setState(() {
+                      angle = details.rotation;
+                    });
+                  },
+                  onInteractionEnd: (ScaleEndDetails details) {
+                    setState(() {
+                      angle = 0.0;
+                    });
+                  },
+                  child: Transform.rotate(
+                    angle: angle,
+                    child: FadeInImage.memoryNetwork(
+                      placeholder: kTransparentImage,
+                      image: widget.images.urls.regular,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                )),
             SafeArea(
               child: Container(
                 height: 56,
@@ -224,7 +280,7 @@ class _ImagesViewState extends State<ImagesView> {
                                 isLiked
                                     ? Icons.favorite
                                     : Icons.favorite_border,
-                                color: isLiked ? Colors.red:null,
+                                color: isLiked ? Colors.red : null,
                               )),
                         ]),
                   ),

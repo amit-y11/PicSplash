@@ -14,15 +14,20 @@ class GetImages {
 
   Future<List<ImageModel>> getRandomImages() async {
     String apiKey = await getKey();
-    final response = await http.get(Uri.parse(
-        'https://api.unsplash.com/photos/random/?client_id=$apiKey&count=30'));
-    if (response.statusCode == 200) {
-      List<dynamic> result = jsonDecode(response.body);
-      List<ImageModel> images =
-          result.map((e) => ImageModel.fromJson(e)).toList();
-      return images;
-    } else {
-      throw "Can't get images";
+    try {
+      final response = await http.get(Uri.parse(
+          'https://api.unsplash.com/photos/random/?client_id=$apiKey&count=30'));
+      if (response.statusCode == 200) {
+        List<dynamic> result = jsonDecode(response.body);
+        List<ImageModel> images =
+            result.map((e) => ImageModel.fromJson(e)).toList();
+        return images;
+      } else {
+        throw "Can't get images";
+      }
+    } on Exception catch (e) {
+      print(e);
+      rethrow;
     }
   }
 
