@@ -14,11 +14,11 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     getImages(widget.query);
-    scrolls.addListener(() {
-      if (scrolls.position.pixels == scrolls.position.maxScrollExtent) {
-        getImages(widget.query);
-      }
-    });
+    // scrolls.addListener(() {
+    //   if (scrolls.position.pixels == scrolls.position.maxScrollExtent) {
+    //     getImages(widget.query);
+    //   }
+    // });
     super.initState();
   }
 

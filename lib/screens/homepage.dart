@@ -19,15 +19,16 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     getMyImages();
-    scrolls.addListener(() {
-      if (scrolls.position.pixels > scrolls.position.maxScrollExtent / 2) {
-        getMyImages();
-      }
-    });
+    // scrolls.addListener(() {
+    //   if (scrolls.position.pixels == scrolls.position.maxScrollExtent) {
+    //     getMyImages();
+    //   }
+    // });
   }
 
-  void getMyImages() async {
+  Future<void> getMyImages() async {
     List<ImageModel> images = await image.getRandomImages();
+    myImage.clear();
     setState(() {
       images.forEach((image) {
         myImage.add(image);
@@ -74,9 +75,14 @@ class _HomePageState extends State<HomePage>
               icon: Icon(Icons.search))
         ],
       ),
-      body: PhotosView(
-        images: myImage,
-        scrollController: scrolls,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await getMyImages();
+        },
+        child: PhotosView(
+          images: myImage,
+          scrollController: scrolls,
+        ),
       ),
     );
   }
