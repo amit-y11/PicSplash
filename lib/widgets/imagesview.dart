@@ -191,6 +191,7 @@ class _ImagesViewState extends State<ImagesView> {
       result = e.message ?? 'Unknown Error';
       print(e);
     }
+    if (mounted) Navigator.pop(context);
     // var file =
     //     await DefaultCacheManager().getSingleFile(widget.images.urls.full);
     // try {

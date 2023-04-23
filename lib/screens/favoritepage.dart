@@ -32,7 +32,7 @@ class _FavoritePageState extends State<FavoritePage> {
             "raw": "",
             "regular": url,
             "thumb": "",
-            "full": ""
+            "full": url
           }
         };
         setState(() {

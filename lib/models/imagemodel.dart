@@ -20,6 +20,11 @@ class ImageModel {
 
   factory ImageModel.decode(String str) =>
       ImageModel.fromJson(json.decode(str));
+  
+  @override
+  String toString() {
+    return 'ImageModel{urls: $urls, id: $id}';
+  }
 }
 
 class UrlModel {
@@ -53,4 +58,8 @@ class UrlModel {
     "small": small,
     "thumb": thumb,
   };
+  @override
+  String toString() {
+    return 'UrlModel{raw: $raw, full: $full, regular: $regular, small: $small, thumb: $thumb}';
+  }
 }
