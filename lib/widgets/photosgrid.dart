@@ -54,7 +54,7 @@ class PhotosView extends StatelessWidget {
                               ImagesView(images: images[index])));
                 },
                 child: Hero(
-                  tag: images[index].id,
+                  tag: images[index].urls.full,
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.white,

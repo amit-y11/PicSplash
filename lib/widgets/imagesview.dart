@@ -207,7 +207,7 @@ class _ImagesViewState extends State<ImagesView> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Hero(
-          tag: widget.images.id,
+          tag: widget.images.urls.full,
           transitionOnUserGestures: true,
           child: Stack(children: [
             Container(
