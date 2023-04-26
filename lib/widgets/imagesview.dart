@@ -3,6 +3,8 @@ import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:picsplash/models/imagemodel.dart';
 import 'package:picsplash/utils/pref_manager.dart';
@@ -38,16 +40,40 @@ class _ImagesViewState extends State<ImagesView> {
 
   downloadImage() async {
     final status = await Permission.storage.request();
-    var dir = Directory("/sdcard/PicSplash");
-    if (!await dir.exists()) {
-      await dir.create(recursive: true);
-    }
     if (status.isGranted) {
+      Directory dir = Directory('/storage/emulated/0/Download/PicSplash');
+      if (!dir.existsSync()) {
+        dir.createSync(recursive: true);
+      }
+      String path = '${dir.path}/image_${widget.images.id}.jpg';
       await FlutterDownloader.enqueue(
         url: widget.images.urls.full,
         savedDir: dir.path,
         fileName: 'image_${widget.images.id}.jpg',
-      );
+      ).whenComplete(() async {
+        // Wait for a few seconds to allow the file to be written.
+        await Future.delayed(Duration(seconds: 3));
+        // After that it will save to gallery.
+        await ImageGallerySaver.saveFile(path).then((value) {
+          Fluttertoast.showToast(
+              msg: 'Wallpaper saved successfully',
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 2,
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }).catchError((onError) {
+          Fluttertoast.showToast(
+              msg: 'Failed to save wallpaper',
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 2,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        });
+      });
     } else {
       await Permission.storage.request();
     }

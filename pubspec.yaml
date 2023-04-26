@@ -40,6 +40,8 @@ dependencies:
   url_launcher: ^6.0.8
   flutter_launcher_icons: ^0.12.0
   async_wallpaper: ^2.0.1
+  fluttertoast: ^8.2.1
+  image_gallery_saver: ^1.7.1
 
 dev_dependencies:
   flutter_test:
