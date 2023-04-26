@@ -19,16 +19,15 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     getMyImages();
-    // scrolls.addListener(() {
-    //   if (scrolls.position.pixels == scrolls.position.maxScrollExtent) {
-    //     getMyImages();
-    //   }
-    // });
+    scrolls.addListener(() {
+      if (scrolls.position.pixels == scrolls.position.maxScrollExtent) {
+        getMyImages();
+      }
+    });
   }
 
   Future<void> getMyImages() async {
     List<ImageModel> images = await image.getRandomImages();
-    myImage.clear();
     setState(() {
       images.forEach((image) {
         myImage.add(image);

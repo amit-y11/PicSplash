@@ -14,69 +14,69 @@ class TopicsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: 0.7,
-      maxChildSize: 0.96,
-      minChildSize: 0.65,
-      builder: (context, scrolls) {
-      return Container(
-        decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(15), topRight: Radius.circular(15)
-        ),
-        boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 2)],
-        color: Theme.of(context).canvasColor),
-        child: OrientationBuilder(builder: (context, orientation) {
-          return GridView.count(
-            controller: scrolls,
-            physics: BouncingScrollPhysics(),
-            crossAxisCount: orientation==Orientation.portrait?2:4,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
-            children: topics
-              .map((topic) => GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OnTopicsClick(
-                                    slug: topic.slug,
-                                    topicTitle: topic.title,
-                                  )));
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                        topic.coverPhoto.urls.small),
-                                    fit: BoxFit.cover)),
-                            child: Stack(children: [
-                              Container(
+        initialChildSize: 0.7,
+        maxChildSize: 0.96,
+        minChildSize: 0.65,
+        builder: (context, scrolls) {
+          return Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15)),
+                boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 2)],
+                color: Theme.of(context).canvasColor),
+            child: OrientationBuilder(builder: (context, orientation) {
+              return GridView.count(
+                  controller: scrolls,
+                  physics: BouncingScrollPhysics(),
+                  crossAxisCount: orientation == Orientation.portrait ? 2 : 4,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
+                  children: topics
+                      .map((topic) => GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => OnTopicsClick(
+                                            slug: topic.slug,
+                                            topicTitle: topic.title,
+                                          )));
+                            },
+                            child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.black38,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                ),
-                              ),
-                              Center(
-                                child: Text(
-                                  topic.title,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22),
-                                ),
-                              ),
-                            ])),
-                      ))
-                  .toList());
-        }),
-      );
-    });
+                                    color: Colors.transparent,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            topic.coverPhoto.urls.small),
+                                        fit: BoxFit.cover)),
+                                child: Stack(children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.black38,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(12)),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      topic.title,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22),
+                                    ),
+                                  ),
+                                ])),
+                          ))
+                      .toList());
+            }),
+          );
+        });
   }
 }
 
@@ -122,15 +122,14 @@ class _OnTopicsClickState extends State<OnTopicsClick> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Text(widget.topicTitle),
-      ),
-      body:PhotosView(
-            images: topicImages,
-            scrollController: scrolls,
-            isNormalGrid: false,
-          )
-    );
+        appBar: AppBar(
+          elevation: 0,
+          title: Text(widget.topicTitle),
+        ),
+        body: PhotosView(
+          images: topicImages,
+          scrollController: scrolls,
+          isNormalGrid: false,
+        ));
   }
 }

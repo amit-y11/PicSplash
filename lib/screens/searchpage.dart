@@ -14,11 +14,11 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     getImages(widget.query);
-    // scrolls.addListener(() {
-    //   if (scrolls.position.pixels == scrolls.position.maxScrollExtent) {
-    //     getImages(widget.query);
-    //   }
-    // });
+    scrolls.addListener(() {
+      if (scrolls.position.pixels == scrolls.position.maxScrollExtent) {
+        getImages(widget.query);
+      }
+    });
     super.initState();
   }
 
@@ -37,6 +37,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PhotosView(images: myImages, scrollController: scrolls,isNormalGrid: false);
+    return PhotosView(
+        images: myImages, scrollController: scrolls, isNormalGrid: false);
   }
 }

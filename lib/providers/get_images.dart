@@ -16,7 +16,7 @@ class GetImages {
     String apiKey = await getKey();
     try {
       final response = await http.get(Uri.parse(
-          'https://api.unsplash.com/photos/random/?client_id=$apiKey&count=30&query=nature'));
+          'https://api.unsplash.com/photos/random/?client_id=$apiKey&count=30'));
       if (response.statusCode == 200) {
         List<dynamic> result = jsonDecode(response.body);
         List<ImageModel> images =
