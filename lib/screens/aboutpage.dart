@@ -56,27 +56,39 @@ class AboutPage extends StatelessWidget {
                     InkWell(
                         onTap: () async {
                           final url = "https://github.com/amit-y11";
-                          if (await canLaunch(url)) {
-                            await launch(url);
+                          if (await canLaunchUrl(Uri.parse(url))) {
+                            await launchUrl(Uri.parse(url));
                           }
                         },
-                        child: FaIcon(FontAwesomeIcons.github,color: Colors.black,size: 30,)),
+                        child: FaIcon(
+                          FontAwesomeIcons.github,
+                          color: Colors.black,
+                          size: 30,
+                        )),
                     InkWell(
                         onTap: () async {
                           final url = "https://telegram.dog/amit_y11";
-                          if (await canLaunch(url)) {
-                            await launch(url);
+                          if (await canLaunchUrl(Uri.parse(url))) {
+                            await launchUrl(Uri.parse(url));
                           }
                         },
-                        child: FaIcon(FontAwesomeIcons.telegram,color: Colors.blueAccent,size: 30,)),
+                        child: FaIcon(
+                          FontAwesomeIcons.telegram,
+                          color: Colors.blueAccent,
+                          size: 30,
+                        )),
                     InkWell(
                         onTap: () async {
                           final url = "https://twitter.com/amit_y11";
-                          if (await canLaunch(url)) {
-                            await launch(url);
+                          if (await canLaunchUrl(Uri.parse(url))) {
+                            await launchUrl(Uri.parse(url));
                           }
                         },
-                        child: FaIcon(FontAwesomeIcons.twitter,color: Colors.blue,size: 30,)),
+                        child: FaIcon(
+                          FontAwesomeIcons.twitter,
+                          color: Colors.blue,
+                          size: 30,
+                        )),
                   ],
                 ),
               ),
@@ -91,9 +103,7 @@ class AboutPage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     "Version: 1.0.0",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
