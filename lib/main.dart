@@ -8,6 +8,8 @@ import 'package:picsplash/utils/my_state.dart';
 import 'package:picsplash/widgets/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/search_provider.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterDownloader.initialize(debug: false);
@@ -41,7 +43,8 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => ThemeState()),
-          ChangeNotifierProvider(create: (context) => PageState())
+          ChangeNotifierProvider(create: (context) => PageState()),
+          ChangeNotifierProvider(create: (context) => SearchProvider()),
         ],
         builder: (context, _) {
           final themeState = Provider.of<ThemeState>(context);
